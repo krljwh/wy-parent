@@ -21,7 +21,7 @@ buildNumber.properties
 .project
 .classpath
 
-# Package Files
+# Package
 *.jar
 *.war
 *.ear
@@ -29,7 +29,6 @@ buildNumber.properties
 *.tar.gz
 *.rar
 
-## Log Files
+## Log
 log/
 *.log
-
