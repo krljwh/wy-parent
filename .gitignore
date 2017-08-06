@@ -1,0 +1,35 @@
+## Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.metadata/
+*.class
+
+## IntelliJ
+/out/
+.idea/
+.idea_modules/
+*.iws
+*.iml
+*.ipr
+.project
+.classpath
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+## Log Files
+log/
+*.log
+
