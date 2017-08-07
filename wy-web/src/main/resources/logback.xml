@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="180 seconds" debug="false">
+
+    <contextName>web</contextName>
+
+    <property name="LOG_DIR" value="logs"/>
+    <property name="level" value="DEBUG"/>
+
+    <timestamp key="day" datePattern="yyyy-MM-dd"/>
+
+    <!--输出到控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %5level %6relative --- [%thread] [%-40logger{40}] [%C:%L] : [%X{traceId}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出到文件 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/web-${day}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>${LOG_DIR}/web-${day}.%i.log.zip</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>5</MaxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>5MB</MaxFileSize>
+        </triggeringPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d %5level %6relative --- [%thread] [%-40logger{40}] [%C:%L] : [%X{traceId}] %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <root level="${level}">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Statement" level="DEBUG" />
+    <logger name="java.sql.PreparedStatement" level="DEBUG" />
+    <logger name="java.sql.ResultSet" level="DEBUG" />
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.mvc" level="INFO"/>
+
+</configuration>

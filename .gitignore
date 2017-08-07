@@ -30,5 +30,5 @@ buildNumber.properties
 *.rar
 
 ## Log
-log/
+logs/
 *.log
