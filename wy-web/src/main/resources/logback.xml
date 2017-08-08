@@ -2,8 +2,9 @@
 <configuration scan="true" scanPeriod="180 seconds" debug="false">
 
     <contextName>web</contextName>
-
+    <!-- 日志存储位置 -->
     <property name="LOG_DIR" value="logs"/>
+    <!-- 日志级别 -->
     <property name="level" value="DEBUG"/>
 
     <timestamp key="day" datePattern="yyyy-MM-dd"/>
@@ -11,24 +12,30 @@
     <!--输出到控制台 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
             <pattern>%d %5level %6relative --- [%thread] [%-40logger{40}] [%C:%L] : [%X{traceId}] %msg%n</pattern>
         </encoder>
     </appender>
 
     <!--输出到文件 -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志文件输出的文件名-->
         <file>${LOG_DIR}/web-${day}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <FileNamePattern>${LOG_DIR}/web-${day}.%i.log.zip</FileNamePattern>
             <MinIndex>1</MinIndex>
             <MaxIndex>5</MaxIndex>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
         </rollingPolicy>
 
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <!--日志文件最大的大小-->
             <MaxFileSize>5MB</MaxFileSize>
         </triggeringPolicy>
 
         <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
             <pattern>%d %5level %6relative --- [%thread] [%-40logger{40}] [%C:%L] : [%X{traceId}] %msg%n</pattern>
         </layout>
     </appender>
